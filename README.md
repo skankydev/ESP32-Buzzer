@@ -1,4 +1,4 @@
-#ESP32-Buzzer
+# ESP32-Buzzer
 _(Un buzzer bluetooth avec un esp32 )_
 
 [![Generic badge](https://img.shields.io/badge/YOUPI-TRUC-blue.svg)](https://shields.io/)

@@ -8,6 +8,7 @@ class MainApp { //création nouvelle classe MainApp
 
 	private:
 		int _ledPin;
+		int _battery;
 
 	public:
 		MainApp();
