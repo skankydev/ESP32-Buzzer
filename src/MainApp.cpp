@@ -15,7 +15,7 @@ MainApp::MainApp(){
 
 void MainApp::init(){
 
-	Serial.begin(38400);
+	Serial.begin(115200);
 	bleuSerial->begin("beerover buzzer");
 	pinMode(_ledPin, OUTPUT);
 
