@@ -3,20 +3,33 @@
 
 
 #include "setting.h"
-#include "BluetoothSerial.h"
+#include "MyBluetooth.h"
+#include "LedManager.h"
+
+
 
 class MainApp { //création nouvelle classe MainApp
 
 	private:
-		int _ledPin;
+		MyBluetooth* myBluetooth;
+		bool _oldBlueToothStatus;
+
+		LedManager* ledManager;
+
+		int _btnIn;
+		
+		int _btnOldStatus;
+
 		int _battery;
-		BluetoothSerial* bleuSerial;
 
 	public:
 		MainApp();
 		void init();
 		void step();
-		String readBleu();
+
+		void stepReady();
+		void stepDisconected();
+
 };
 
 #endif
