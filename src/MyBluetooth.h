@@ -17,9 +17,13 @@ class MyBluetooth{
 		bool _isConnected;
 		bool _isNotified;
 
+		//String _batteryLvl;
+
 		BLEServer *_server;
 		BLEService *_service;
 		BLECharacteristic* _notifieur;
+		BLECharacteristic* _battery;
+		BLECharacteristic* _status;
 
 		LedManager* ledManager;
 
@@ -31,6 +35,8 @@ class MyBluetooth{
 		bool setConnected();
 		bool setDisconnected();
 		bool isConnected();
+
+		void setBatteryLvl(float lvl);
 };
 
 

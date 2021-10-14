@@ -43,16 +43,29 @@ void MyBluetooth::init(){
 	
 	_service = _server->createService(SERVICE_UUID);
 	
-	_notifieur = _service->createCharacteristic(CHARACTERISTIC_UUID,
+	_notifieur = _service->createCharacteristic(NOTIFIEUR_UUID,
 		BLECharacteristic::PROPERTY_READ |
 		BLECharacteristic::PROPERTY_WRITE  |
 		BLECharacteristic::PROPERTY_NOTIFY |
 		BLECharacteristic::PROPERTY_INDICATE);
 	_notifieur->addDescriptor(new BLE2902());
 
+	_battery = _service->createCharacteristic(BATTERY_UUID,
+		BLECharacteristic::PROPERTY_READ );
+	_battery->addDescriptor(new BLE2902());
+
+	_status = _service->createCharacteristic(STATUS_UUID,
+		BLECharacteristic::PROPERTY_READ |
+		BLECharacteristic::PROPERTY_WRITE);
+	_status->addDescriptor(new BLE2902());
+	
+	
+	
+
 	_service->start();
 	_server->getAdvertising()->start();
 	Serial.println("Test BLE wait connection");
+
 	ledManager->startBlinkerRed();
 }
 
@@ -76,4 +89,8 @@ bool MyBluetooth::setDisconnected(){
 
 bool MyBluetooth::isConnected(){
 	return _isConnected;
+}
+
+void MyBluetooth::setBatteryLvl(float lvl){
+	_battery->setValue(lvl);
 }

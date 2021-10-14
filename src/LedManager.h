@@ -11,26 +11,29 @@ class LedManager{
 		LedManager();
 
 		int _redPin;
-		int _redStatus;
-
-
+		int _greenPin;
+		int _buzzerPin;
 
 		Ticker* blinker;
 
 	public:
 		static LedManager* getInstance();
 		
-		int _greenPin;
+		int _redStatus;
 		int _greenStatus;
+		int _buzzerStatus;
 
 		void init();
 		void step();
-
 		
 		void startBlinkerRed();
 		void blinkRed();
+
 		void startBlinkerGreen();
 		void blinkGreen();
+
+		void startBlinkerBuzzer();
+		void blinkBuzzer();
 
 		void stopBlinker();
 };

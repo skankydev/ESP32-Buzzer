@@ -8,6 +8,10 @@ void blinkerGreen(LedManager* ledManager){
 	ledManager->blinkGreen();
 }
 
+void blinkerBuzzer(LedManager* ledManager){
+	ledManager->blinkBuzzer();
+}
+
 LedManager* LedManager::instance = nullptr;
 
 LedManager* LedManager::getInstance(){
@@ -22,9 +26,11 @@ LedManager::LedManager(){
 
 	_redPin = RED;
 	_greenPin = GREEN;
+	_buzzerPin = BUZZER_LED;
 
 	_redStatus = LOW;
 	_greenStatus = LOW;
+	_buzzerStatus = HIGH;
 
 	blinker = new Ticker;
 }
@@ -34,9 +40,11 @@ LedManager::LedManager(){
 void LedManager::init(){
 	pinMode(_redPin, OUTPUT);
 	pinMode(_greenPin,OUTPUT);
+	pinMode(_buzzerPin,OUTPUT);
 
-	digitalWrite(_redPin, LOW);
-	digitalWrite(_greenPin, LOW);
+	digitalWrite(_redPin, _redStatus);
+	digitalWrite(_greenPin, _greenStatus);
+	digitalWrite(_buzzerPin, _buzzerStatus);
 }
 
 void LedManager::step(){
@@ -74,3 +82,15 @@ void LedManager::blinkGreen() {
 	}
 }
 
+void LedManager::startBlinkerBuzzer(){
+	blinker->detach();
+	blinker->attach_ms(500, blinkerBuzzer,this);
+}
+
+void LedManager::blinkBuzzer() {
+	if(_buzzerStatus == LOW){
+		_buzzerStatus = HIGH;
+	}else{
+		_buzzerStatus = LOW;
+	}
+}
