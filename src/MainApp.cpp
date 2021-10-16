@@ -41,7 +41,6 @@ void MainApp::step(){
 	
 	uint16_t v = analogRead(_battery);
 	float battery_voltage = ((float)v / 4095.0) * 2.0 * 3.3 * (1100 / 1000.0);
-	Serial.println("DEBUG: Value: " + String(v) + " ,Battery Voltage is " + String(battery_voltage) + "V");
 	myBluetooth->setBatteryLvl(battery_voltage);
 	
 	if(myBluetooth->isConnected()){

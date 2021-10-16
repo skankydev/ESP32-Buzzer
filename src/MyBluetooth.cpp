@@ -3,8 +3,6 @@
 
 class EtatServeur : public BLEServerCallbacks 
 {
-
-
 	void onConnect(BLEServer* pServer){
 		MyBluetooth* myBluetooth = MyBluetooth::getInstance();
 		myBluetooth->setConnected();
@@ -16,6 +14,20 @@ class EtatServeur : public BLEServerCallbacks
 	}
 };
 
+class StatusUpdate: public BLECharacteristicCallbacks{
+	void onWrite(BLECharacteristic *status) {
+		//MyBluetooth* myBluetooth = MyBluetooth::getInstance();
+		std::string tmp = status->getValue();
+		String value = "";
+		for (int i = 0; i < tmp.length(); i++) {
+			value += String(tmp[i]);
+		}
+
+		Serial.println("BLE Callbacks :");
+		Serial.println(value);
+
+	}
+};
 
 MyBluetooth* MyBluetooth::instance = nullptr;
 
@@ -58,7 +70,7 @@ void MyBluetooth::init(){
 		BLECharacteristic::PROPERTY_READ |
 		BLECharacteristic::PROPERTY_WRITE);
 	_status->addDescriptor(new BLE2902());
-	
+	_status->setCallbacks(new StatusUpdate());
 	
 	
 
@@ -78,12 +90,14 @@ void MyBluetooth::sendNotif(){
 
 bool MyBluetooth::setConnected(){
 	ledManager->stopBlinker();
+	ledManager->_redStatus = LOW;
 	_isConnected = true;
 	return _isConnected;
 }
 bool MyBluetooth::setDisconnected(){
 	ledManager->startBlinkerRed();
 	_isConnected = false;
+	_server->getAdvertising()->start();
 	return _isConnected;
 }
 
@@ -92,5 +106,8 @@ bool MyBluetooth::isConnected(){
 }
 
 void MyBluetooth::setBatteryLvl(float lvl){
-	_battery->setValue(lvl);
+	
+	char txString[8]; 
+	dtostrf(lvl, 2, 2, txString);
+	_battery->setValue(txString);
 }
