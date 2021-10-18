@@ -6,7 +6,7 @@
 #include <BLEUtils.h>
 #include <BLEServer.h>
 #include <BLE2902.h>
-#include "LedManager.h"
+#include "StatusManager.h"
 
 
 class MyBluetooth{
@@ -14,6 +14,7 @@ class MyBluetooth{
 	private:
 		static MyBluetooth* instance;
 		MyBluetooth();
+
 		bool _isConnected;
 		bool _isNotified;
 
@@ -25,8 +26,7 @@ class MyBluetooth{
 		BLECharacteristic* _battery;
 		BLECharacteristic* _status;
 
-		LedManager* ledManager;
-
+		StatusManager* statusManager;
 
 	public:
 		static MyBluetooth* getInstance();

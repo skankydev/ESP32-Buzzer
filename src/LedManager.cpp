@@ -28,9 +28,9 @@ LedManager::LedManager(){
 	_greenPin = GREEN;
 	_buzzerPin = BUZZER_LED;
 
-	_redStatus = LOW;
-	_greenStatus = LOW;
-	_buzzerStatus = HIGH;
+	redStatus = LOW;
+	greenStatus = LOW;
+	buzzerStatus = HIGH;
 
 	blinker = new Ticker;
 }
@@ -38,18 +38,20 @@ LedManager::LedManager(){
 
 
 void LedManager::init(){
+	Serial.println("LedManager init");
 	pinMode(_redPin, OUTPUT);
 	pinMode(_greenPin,OUTPUT);
 	pinMode(_buzzerPin,OUTPUT);
 
-	digitalWrite(_redPin, _redStatus);
-	digitalWrite(_greenPin, _greenStatus);
-	digitalWrite(_buzzerPin, _buzzerStatus);
+	digitalWrite(_redPin, redStatus);
+	digitalWrite(_greenPin, greenStatus);
+	digitalWrite(_buzzerPin, buzzerStatus);
 }
 
 void LedManager::step(){
-	digitalWrite(_redPin, _redStatus);
-	digitalWrite(_greenPin, _greenStatus);
+	digitalWrite(_redPin, redStatus);
+	digitalWrite(_greenPin, greenStatus);
+	digitalWrite(_buzzerPin, buzzerStatus);
 }
 
 void LedManager::stopBlinker(){
@@ -62,10 +64,10 @@ void LedManager::startBlinkerRed(){
 }
 
 void LedManager::blinkRed() {
-	if(_redStatus == LOW){
-		_redStatus = HIGH;
+	if(redStatus == LOW){
+		redStatus = HIGH;
 	}else{
-		_redStatus = LOW;
+		redStatus = LOW;
 	}
 }
 
@@ -75,10 +77,10 @@ void LedManager::startBlinkerGreen(){
 }
 
 void LedManager::blinkGreen() {
-	if(_greenStatus == LOW){
-		_greenStatus = HIGH;
+	if(greenStatus == LOW){
+		greenStatus = HIGH;
 	}else{
-		_greenStatus = LOW;
+		greenStatus = LOW;
 	}
 }
 
@@ -87,10 +89,10 @@ void LedManager::startBlinkerBuzzer(){
 	blinker->attach_ms(500, blinkerBuzzer,this);
 }
 
-void LedManager::blinkBuzzer() {
-	if(_buzzerStatus == LOW){
-		_buzzerStatus = HIGH;
+void LedManager::blinkBuzzer(){
+	if(buzzerStatus == LOW){
+		buzzerStatus = HIGH;
 	}else{
-		_buzzerStatus = LOW;
+		buzzerStatus = LOW;
 	}
 }

@@ -5,21 +5,17 @@
 #include "setting.h"
 #include "MyBluetooth.h"
 #include "LedManager.h"
-
+#include "StatusManager.h"
 
 
 class MainApp { //création nouvelle classe MainApp
 
 	private:
 		MyBluetooth* myBluetooth;
-		bool _oldBlueToothStatus;
-
 		LedManager* ledManager;
+		StatusManager* statusManager;
 
 		int _btnIn;
-		
-		int _btnOldStatus;
-
 		int _battery;
 
 	public:
@@ -28,7 +24,6 @@ class MainApp { //création nouvelle classe MainApp
 		void step();
 
 		void stepReady();
-		void stepDisconected();
 
 };
 

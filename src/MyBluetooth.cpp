@@ -16,15 +16,15 @@ class EtatServeur : public BLEServerCallbacks
 
 class StatusUpdate: public BLECharacteristicCallbacks{
 	void onWrite(BLECharacteristic *status) {
-		//MyBluetooth* myBluetooth = MyBluetooth::getInstance();
 		std::string tmp = status->getValue();
 		String value = "";
 		for (int i = 0; i < tmp.length(); i++) {
 			value += String(tmp[i]);
 		}
 
-		Serial.println("BLE Callbacks :");
-		Serial.println(value);
+		StatusManager* statusManager = StatusManager::getInstance();
+		statusManager->setStatus(value);
+		//Serial.println("BLE Callbacks : "+value);
 
 	}
 };
@@ -42,7 +42,7 @@ MyBluetooth* MyBluetooth::getInstance(){
 MyBluetooth::MyBluetooth(){
 	_isConnected = false;
 	_isNotified = false;
-	ledManager = LedManager::getInstance();
+	statusManager = StatusManager::getInstance();
 
 }
 
@@ -76,26 +76,26 @@ void MyBluetooth::init(){
 
 	_service->start();
 	_server->getAdvertising()->start();
-	Serial.println("Test BLE wait connection");
+	//Serial.println("Test BLE wait connection");
+	statusManager->setStatus("disconected");
 
-	ledManager->startBlinkerRed();
+	
 }
 
 void MyBluetooth::sendNotif(){
 	
-	_notifieur->setValue("Bonjour"); // la nouvelle valeur du compteur
+	_notifieur->setValue("Bonjour");
 	_notifieur->notify();
-	//delay(1000);
+	delay(100);
 }
 
 bool MyBluetooth::setConnected(){
-	ledManager->stopBlinker();
-	ledManager->_redStatus = LOW;
+	statusManager->setStatus("wait");
 	_isConnected = true;
 	return _isConnected;
 }
 bool MyBluetooth::setDisconnected(){
-	ledManager->startBlinkerRed();
+	statusManager->setStatus("disconected");
 	_isConnected = false;
 	_server->getAdvertising()->start();
 	return _isConnected;
@@ -105,8 +105,8 @@ bool MyBluetooth::isConnected(){
 	return _isConnected;
 }
 
+
 void MyBluetooth::setBatteryLvl(float lvl){
-	
 	char txString[8]; 
 	dtostrf(lvl, 2, 2, txString);
 	_battery->setValue(txString);

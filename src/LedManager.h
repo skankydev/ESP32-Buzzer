@@ -19,9 +19,9 @@ class LedManager{
 	public:
 		static LedManager* getInstance();
 		
-		int _redStatus;
-		int _greenStatus;
-		int _buzzerStatus;
+		int redStatus;
+		int greenStatus;
+		int buzzerStatus;
 
 		void init();
 		void step();
