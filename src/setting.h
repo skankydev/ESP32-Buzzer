@@ -10,8 +10,8 @@
 #define BATTERY_UUID   "14b12d85-f19a-4a82-893b-e0ac47070626"
 #define STATUS_UUID    "28f31c76-2d13-11ec-8d3d-0242ac130003"
 
-#define RED        12
-#define GREEN      14
+#define GREEN      12
+#define RED        14
 #define BUZZER_LED 27
 
 #define BUTTON_IN  4
