@@ -14,7 +14,7 @@
 #define RED        14
 #define BUZZER_LED 27
 
-#define BUTTON_IN  4
+#define BUTTON_IN  32
 
 #define BATTERY    35
 

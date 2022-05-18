@@ -19,7 +19,8 @@ void MainApp::init(){
 	Serial.begin(115200);
 	Serial.println("Beerover Buzzer");
 
-	//pinMode(_btnIn, INPUT);
+	//
+	pinMode(_btnIn, INPUT);
 
 	ledManager->init();
 	statusManager->init();
