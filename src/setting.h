@@ -12,10 +12,15 @@
 
 #define GREEN      12
 #define RED        14
-#define BUZZER_LED 27
 
+#define BUZZER_LED 19
 #define BUTTON_IN  32
 
-#define BATTERY    35
+#define BUTTON_A  33
+#define BUTTON_B  25
+#define BUTTON_C  26
+#define BUTTON_D  27
+
+//#define BATTERY    35
 
 #endif

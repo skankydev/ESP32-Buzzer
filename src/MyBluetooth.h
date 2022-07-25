@@ -31,7 +31,7 @@ class MyBluetooth{
 	public:
 		static MyBluetooth* getInstance();
 		void init();
-		void sendNotif();
+		void sendNotif(String btnName);
 		bool setConnected();
 		bool setDisconnected();
 		bool isConnected();

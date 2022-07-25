@@ -38,6 +38,11 @@ void StatusManager::setStatus(String status){
 
 		}else if(_status == F("wait")){
 			ledManager->startBlinkerBuzzer();
+			ledManager->greenStatus = HIGH;
+			
+		}else if(_status == F("choice")){
+			ledManager->buzzerStatus = HIGH;
+			ledManager->startBlinkerGreen();
 			
 		}else if(_status == F("win")){
 			ledManager->buzzerStatus = HIGH;

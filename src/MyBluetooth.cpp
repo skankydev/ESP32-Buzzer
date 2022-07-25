@@ -82,11 +82,11 @@ void MyBluetooth::init(){
 	
 }
 
-void MyBluetooth::sendNotif(){
-	
-	_notifieur->setValue("Bonjour");
+void MyBluetooth::sendNotif(String btnName){
+	Serial.println(btnName);
+	_notifieur->setValue(btnName.c_str());
 	_notifieur->notify();
-	delay(100);
+	delay(500);
 }
 
 bool MyBluetooth::setConnected(){
@@ -109,5 +109,5 @@ bool MyBluetooth::isConnected(){
 void MyBluetooth::setBatteryLvl(float lvl){
 	char txString[8]; 
 	dtostrf(lvl, 2, 2, txString);
-	_battery->setValue(txString);
+	_battery->setValue("0");
 }

@@ -18,12 +18,18 @@ class MainApp { //création nouvelle classe MainApp
 		int _btnIn;
 		int _battery;
 
+		int _btnA;
+		int _btnB;
+		int _btnC;
+		int _btnD;
+
 	public:
 		MainApp();
 		void init();
 		void step();
 
 		void stepReady();
+		void stepChoice();
 
 };
 
