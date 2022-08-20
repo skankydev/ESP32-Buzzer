@@ -36,17 +36,24 @@ void StatusManager::setStatus(String status){
 		if(_status == F("disconected")){
 			ledManager->startBlinkerRed();
 
-		}else if(_status == F("wait")){
-			ledManager->startBlinkerBuzzer();
+		}else if(_status == F("sleep")){
 			ledManager->greenStatus = HIGH;
-			
+			ledManager->redStatus = HIGH;
+			ledManager->buzzerStatus = LOW;
+		}else if(_status == F("wait")){
+			ledManager->greenStatus = HIGH;
+			ledManager->redStatus = LOW;
+			ledManager->buzzerStatus = LOW;
+			ledManager->startBlinkerBuzzer();
 		}else if(_status == F("choice")){
+			ledManager->greenStatus = LOW;
+			ledManager->redStatus = LOW;
 			ledManager->buzzerStatus = HIGH;
 			ledManager->startBlinkerGreen();
-			
 		}else if(_status == F("win")){
-			ledManager->buzzerStatus = HIGH;
 			ledManager->greenStatus = HIGH;
+			ledManager->redStatus = LOW;
+			ledManager->buzzerStatus = HIGH;
 
 		}else if(_status == F("lost")){
 			ledManager->redStatus = HIGH;

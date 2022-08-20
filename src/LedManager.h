@@ -35,6 +35,9 @@ class LedManager{
 		void startBlinkerBuzzer();
 		void blinkBuzzer();
 
+		void startBlinkerAll();
+		void blinkAll();
+
 		void stopBlinker();
 };
 

@@ -90,7 +90,7 @@ void MyBluetooth::sendNotif(String btnName){
 }
 
 bool MyBluetooth::setConnected(){
-	statusManager->setStatus("wait");
+	statusManager->setStatus("sleep");
 	_isConnected = true;
 	return _isConnected;
 }
